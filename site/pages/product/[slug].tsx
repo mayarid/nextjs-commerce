@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
+import { useEffect, useState } from 'react'
+import generateUUID from '@lib/uuid-generator'
 
 export async function getStaticProps({
   params,

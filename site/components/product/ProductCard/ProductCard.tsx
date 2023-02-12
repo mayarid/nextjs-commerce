@@ -39,7 +39,7 @@ const ProductCard: FC<Props> = ({
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/product/${product.id}`}
       className={rootClassName}
       aria-label={product.name}
     >
@@ -70,16 +70,16 @@ const ProductCard: FC<Props> = ({
               variant={product.variants[0]}
             />
           )}
-          {!noNameTag && (
+          {!noNameTag ? (
             <div className={s.header}>
               <h3 className={s.name}>
                 <span>{product.name}</span>
               </h3>
-              <div className={s.price}>
-                {`${price} ${product.price?.currencyCode}`}
-              </div>
+              {product.type !== 'fundraising' ? (
+                <div className={s.price}>{`${price}`}</div>
+              ) : null}
             </div>
-          )}
+          ) : null}
           <div className={s.imageContainer}>
             {product?.images && (
               <Image

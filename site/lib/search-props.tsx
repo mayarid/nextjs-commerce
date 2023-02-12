@@ -3,13 +3,18 @@ import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import commerce from '@lib/api/commerce'
 
 export async function getSearchStaticProps({
+  params,
   preview,
   locale,
   locales,
 }: GetStaticPropsContext) {
   const config = { locale, locales }
   const pagesPromise = commerce.getAllPages({ config, preview })
-  const siteInfoPromise = commerce.getSiteInfo({ config, preview })
+  const siteInfoPromise = commerce.getSiteInfo({
+    variables: params?.category,
+    config,
+    preview,
+  })
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
   return {

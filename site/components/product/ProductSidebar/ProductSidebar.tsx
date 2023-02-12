@@ -3,6 +3,7 @@ import { useAddItem } from '@framework/cart'
 import { FC, useEffect, useState } from 'react'
 import { ProductOptions } from '@components/product'
 import type { Product } from '@commerce/types/product'
+import generateUUID from '@lib/uuid-generator'
 import { Button, Text, Rating, Collapse, useUI } from '@components/ui'
 import {
   getProductVariant,
@@ -33,8 +34,8 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
     setError(null)
     try {
       await addItem({
-        productId: String(product.id),
-        variantId: String(variant ? variant.id : product.variants[0]?.id),
+        variantId: product.id,
+        productId: product.id,
       })
       setSidebarView('CART_VIEW')
       openSidebar()

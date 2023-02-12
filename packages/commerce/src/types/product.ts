@@ -133,6 +133,8 @@ export interface Product {
    * The product’s vendor name.
    */
   vendor?: string
+  category?: string
+  type?: string
 }
 
 export interface SearchProductsBody {

@@ -114,7 +114,11 @@ const CartSidebarView: FC = () => {
                   Proceed to Checkout ({total})
                 </Button>
               ) : (
-                <Button href="/checkout" Component="a" width="100%">
+                <Button
+                  href={`https://www.mayar.shop/checkout/cart/97bf1190-a6bc-45de-a954-1fc78a3e1628`}
+                  Component="a"
+                  width="100%"
+                >
                   Proceed to Checkout
                 </Button>
               )}

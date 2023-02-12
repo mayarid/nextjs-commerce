@@ -257,6 +257,47 @@ importers:
       taskr-swc: link:../taskr-swc
       typescript: 4.8.3
 
+  packages/mayar:
+    specifiers:
+      '@taskr/clear': ^1.1.0
+      '@taskr/esnext': ^1.1.0
+      '@taskr/watch': ^1.1.0
+      '@types/cookie': ^0.4.1
+      '@types/node': ^17.0.8
+      '@types/node-fetch': 2.6.2
+      '@types/react': ^18.0.14
+      '@vercel/commerce': workspace:*
+      cookie: ^0.4.1
+      js-cookie: ^3.0.1
+      lint-staged: ^12.1.7
+      next: ^13.0.6
+      prettier: ^2.5.1
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      taskr: ^1.1.0
+      taskr-swc: ^0.0.1
+      typescript: ^4.7.4
+    dependencies:
+      '@vercel/commerce': link:../commerce
+      cookie: 0.4.2
+      js-cookie: 3.0.1
+    devDependencies:
+      '@taskr/clear': 1.1.0
+      '@taskr/esnext': 1.1.0
+      '@taskr/watch': 1.1.0
+      '@types/cookie': 0.4.1
+      '@types/node': 17.0.45
+      '@types/node-fetch': 2.6.2
+      '@types/react': 18.0.20
+      lint-staged: 12.5.0
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      prettier: 2.7.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      taskr: 1.1.0
+      taskr-swc: link:../taskr-swc
+      typescript: 4.8.3
+
   packages/ordercloud:
     specifiers:
       '@taskr/clear': ^1.1.0
@@ -615,6 +656,7 @@ importers:
       '@vercel/commerce-commercejs': workspace:*
       '@vercel/commerce-kibocommerce': workspace:*
       '@vercel/commerce-local': workspace:*
+      '@vercel/commerce-mayar': workspace:*
       '@vercel/commerce-ordercloud': workspace:*
       '@vercel/commerce-saleor': workspace:*
       '@vercel/commerce-sfcc': workspace:*
@@ -657,6 +699,7 @@ importers:
       '@vercel/commerce-commercejs': link:../packages/commercejs
       '@vercel/commerce-kibocommerce': link:../packages/kibocommerce
       '@vercel/commerce-local': link:../packages/local
+      '@vercel/commerce-mayar': link:../packages/mayar
       '@vercel/commerce-ordercloud': link:../packages/ordercloud
       '@vercel/commerce-saleor': link:../packages/saleor
       '@vercel/commerce-sfcc': link:../packages/sfcc
@@ -5005,7 +5048,7 @@ packages:
       eslint: 8.23.1
       eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 2.7.1_hdzsmr7kawaomymueo2tso6fjq
-      eslint-plugin-import: 2.26.0_eslint@8.23.1
+      eslint-plugin-import: 2.26.0_6r44hdgvdiqbnekattsi42eeia
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.23.1
       eslint-plugin-react: 7.31.8_eslint@8.23.1
       eslint-plugin-react-hooks: 4.6.0_eslint@8.23.1
@@ -5042,7 +5085,7 @@ packages:
     dependencies:
       debug: 4.3.4
       eslint: 8.23.1
-      eslint-plugin-import: 2.26.0_eslint@8.23.1
+      eslint-plugin-import: 2.26.0_6r44hdgvdiqbnekattsi42eeia
       glob: 7.2.3
       is-glob: 4.0.3
       resolve: 1.22.1
@@ -5051,7 +5094,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils/2.7.4_oxfrjumrtiktpkw7r2zaom7f74:
+  /eslint-module-utils/2.7.4_ssuof5somrshypivkj4dxrg5tm:
     resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -5072,14 +5115,16 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
+      '@typescript-eslint/parser': 5.37.0_4brgkhw6cq4me3drk3kxrpb2mm
       debug: 3.2.7
       eslint: 8.23.1
       eslint-import-resolver-node: 0.3.6
+      eslint-import-resolver-typescript: 2.7.1_hdzsmr7kawaomymueo2tso6fjq
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /eslint-plugin-import/2.26.0_eslint@8.23.1:
+  /eslint-plugin-import/2.26.0_6r44hdgvdiqbnekattsi42eeia:
     resolution: {integrity: sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -5089,13 +5134,14 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
+      '@typescript-eslint/parser': 5.37.0_4brgkhw6cq4me3drk3kxrpb2mm
       array-includes: 3.1.5
       array.prototype.flat: 1.3.0
       debug: 2.6.9
       doctrine: 2.1.0
       eslint: 8.23.1
       eslint-import-resolver-node: 0.3.6
-      eslint-module-utils: 2.7.4_oxfrjumrtiktpkw7r2zaom7f74
+      eslint-module-utils: 2.7.4_ssuof5somrshypivkj4dxrg5tm
       has: 1.0.3
       is-core-module: 2.10.0
       is-glob: 4.0.3

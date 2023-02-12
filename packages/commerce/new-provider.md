@@ -221,21 +221,21 @@ When creating a PR for a new provider, include this list in the PR description a
 
 **Status**
 
-- [ ] CommerceProvider
-- [ ] Schema & TS types
-- [ ] API Operations - Get all collections
-- [ ] API Operations - Get all pages
-- [ ] API Operations - Get all products
-- [ ] API Operations - Get page
-- [ ] API Operations - Get product
+- [x] CommerceProvider
+- [x] Schema & TS types
+- [x] API Operations - Get all collections
+- [x] API Operations - Get all pages
+- [x] API Operations - Get all products
+- [x] API Operations - Get page
+- [x] API Operations - Get product
 - [ ] API Operations - Get Shop Info (categories and vendors working — `vendors` query still a WIP PR on Reaction)
-- [ ] Hook - Add Item
-- [ ] Hook - Remove Item
-- [ ] Hook - Update Item
-- [ ] Hook - Get Cart (account-tied carts working, anonymous carts working, cart reconciliation working)
+- [x] Hook - Add Item
+- [x] Hook - Remove Item
+- [x] Hook - Update Item
+- [x] Hook - Get Cart (account-tied carts working, anonymous carts working, cart reconciliation working)
 - [ ] Auth (based on a WIP PR on Reaction - still need to implement refresh tokens)
 - [ ] Customer information
 - [ ] Product attributes - Size, Colors
-- [ ] Custom checkout
+- [x] Custom checkout
 - [ ] Typing (in progress)
-- [ ] Tests
+- [x] Tests
