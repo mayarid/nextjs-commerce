@@ -27,10 +27,10 @@ export interface IProduct {
   event: any
   order: any
   path: string
-  coverImageId: string
-  multipleImageId: any
+  coverImageId: null | string
+  multipleImageId: null | string
   multipleImage: null | IMultipleImage[]
-  coverImage: ICover
+  coverImage: null | ICover
 }
 
 export interface IProductAPI {

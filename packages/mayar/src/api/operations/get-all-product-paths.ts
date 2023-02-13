@@ -6,12 +6,13 @@ export type GetAllProductPathsResult = {
 
 export default function getAllProductPathsOperation() {
   async function getAllProductPaths(): Promise<GetAllProductPathsResult> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/product`, {
+    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/product`, {
       headers: {
         Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
       },
     })
 
+    console.log(`[operations/get-all-product-paths]Status: ${res.statusText}`)
     if (!res.ok) {
       return {
         products: [],

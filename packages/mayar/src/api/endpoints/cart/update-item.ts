@@ -8,7 +8,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   config,
 }) => {
   const res = await fetch(
-    `https://api.mayar.id/hl/v1/cart?sessionId=${
+    `${process.env.MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${
       cartId ? cartId : getCartCookie(config.cartCookie)
     }`,
     {
@@ -20,6 +20,20 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   )
   let items: LineItem[] = []
   const result: MayarCartAPI = await res.json()
+
+  if (!res.ok) {
+    return {
+      headers: {
+        'Set-Cookie': getCartCookie(
+          config.cartCookie,
+          cartId,
+          config.cartCookieMaxAge
+        ),
+      },
+    }
+  }
+
+  console.log(`[cart/update-cart]Status: ${res.statusText}`)
 
   result.data.productItems.map((item, _) => {
     items.push({

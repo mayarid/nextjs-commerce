@@ -7,7 +7,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
   config,
   commerce,
 }) => {
-  let url = `https://api.mayar.id/hl/v1/product`
+  let url = `${process.env.MAYAR_API_DOMAIN}/hl/v1/product`
   if (categoryId) {
     url += `?type=${categoryId}`
   }
@@ -19,6 +19,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
     },
   })
 
+  console.log(`[catalog/products]Status: ${res.statusText}`)
   if (!res.ok) {
     return {
       data: { products: [], found: false },
@@ -34,7 +35,61 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
   }
 
   let products: Product[] = []
+
   result.data.map((item, _) => {
+    if (item.coverImage) {
+      return products.push({
+        id: item.id,
+        name: item.name,
+        description: '',
+        descriptionHtml: item.description,
+        path: `/${item.id}`,
+        slug: item.link,
+        category: item.category,
+        type: item.type,
+        images: [
+          {
+            url: item.coverImage.url,
+            alt: item.name,
+            width: 1000,
+            height: 1000,
+          },
+        ],
+        variants: [],
+        price: {
+          value: item.amount ? item.amount : 0,
+          currencyCode: 'IDR',
+        },
+        options: [],
+      })
+    }
+    if (item.multipleImage && item.multipleImage.length > 0) {
+      return products.push({
+        id: item.id,
+        name: item.name,
+        description: '',
+        descriptionHtml: item.description,
+        path: `/${item.id}`,
+        slug: item.link,
+        category: item.category,
+        type: item.type,
+        images: [
+          {
+            url: item.multipleImage[0].url,
+            alt: item.name,
+            width: 1000,
+            height: 1000,
+          },
+        ],
+        variants: [],
+        price: {
+          value: item.amount ? item.amount : 0,
+          currencyCode: 'IDR',
+        },
+        options: [],
+      })
+    }
+
     return products.push({
       id: item.id,
       name: item.name,
@@ -44,14 +99,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
       slug: item.link,
       category: item.category,
       type: item.type,
-      images: [
-        {
-          url: item.coverImage.url,
-          alt: item.name,
-          width: 1000,
-          height: 1000,
-        },
-      ],
+      images: [],
       variants: [],
       price: {
         value: item.amount ? item.amount : 0,

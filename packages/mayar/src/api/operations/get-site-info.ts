@@ -21,13 +21,14 @@ export default function getSiteInfoOperation({}: OperationContext<any>) {
     config?: Partial<MayarConfig>
     preview?: boolean
   } = {}): Promise<GetSiteInfoResult> {
-    const res = await fetch(`https://api.mayar.id/hl/v1/product`, {
+    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/product`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
       },
     })
 
+    console.log(`[operations/get-site-info]Status: ${res.statusText}`)
     if (!res.ok) {
       return {
         categories: [],

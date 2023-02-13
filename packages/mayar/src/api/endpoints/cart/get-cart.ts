@@ -11,7 +11,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
 }) => {
   const sessionId = cartId ? cartId : getCartCookie(config.cartCookie)
   const res = await fetch(
-    `https://api.mayar.id/hl/v1/cart?sessionId=${sessionId}`,
+    `${process.env.MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${sessionId}`,
     {
       method: 'GET',
       headers: {
@@ -20,7 +20,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
     }
   )
 
-  console.log(`[get-cart]: CartID ${cartId}`)
+  console.log(`[cart/get-cart]Status: ${res.statusText}`)
   if (!res.ok) {
     return {
       data: null,
@@ -29,10 +29,57 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
 
   let items: LineItem[] = []
   const result: MayarCartAPI = await res.json()
-  console.log(result.data)
 
   result.data.productItems.map((item, _) => {
-    items.push({
+    if (item.product.coverImage) {
+      return items.push({
+        id: item.product.id,
+        variantId: item.product.id,
+        productId: item.product.id,
+        name: item.product.name,
+        quantity: item.qty,
+        discounts: [],
+        path: item.product.path,
+        variant: {
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.amount ? item.product.amount : 0,
+          listPrice: item.product.amount ? item.product.amount : 0,
+          image: {
+            url: item.product.coverImage.url,
+            alt: item.product.name,
+            width: 1000,
+            height: 1000,
+          },
+        },
+      })
+    }
+
+    if (item.product.multipleImage && item.product.multipleImage.length > 0) {
+      return items.push({
+        id: item.product.id,
+        variantId: item.product.id,
+        productId: item.product.id,
+        name: item.product.name,
+        quantity: item.qty,
+        discounts: [],
+        path: item.product.path,
+        variant: {
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.amount ? item.product.amount : 0,
+          listPrice: item.product.amount ? item.product.amount : 0,
+          image: {
+            url: item.product.multipleImage[0].url,
+            alt: item.product.name,
+            width: 1000,
+            height: 1000,
+          },
+        },
+      })
+    }
+
+    return items.push({
       id: item.product.id,
       variantId: item.product.id,
       productId: item.product.id,
@@ -46,7 +93,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
         price: item.product.amount ? item.product.amount : 0,
         listPrice: item.product.amount ? item.product.amount : 0,
         image: {
-          url: item.product.coverImage.url,
+          url: '',
           alt: item.product.name,
           width: 1000,
           height: 1000,

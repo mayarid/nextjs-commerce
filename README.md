@@ -18,6 +18,13 @@ Demo live at: [demo.vercel.store](https://demo.vercel.store/)
 - Commerce.js Demo: <https://commercejs.vercel.store/>
 - SalesForce Cloud Commerce Demo: <https://salesforce-cloud-commerce.vercel.store/>
 
+## Run with mayar commerce
+
+```bash
+pnpm install & pnpm build # run these commands in the root folder of the mono repo
+pnpm dev # run this command in the root folder
+```
+
 ## Run minimal version locally
 
 > To run a minimal version of Next.js Commerce you can start with the default local provider `@vercel/commerce-local` that has all features disabled (cart, auth) and uses static files for the backend
@@ -54,16 +61,14 @@ Next.js Commerce integrates out-of-the-box with BigCommerce, Shopify, Swell, Sal
 
 ## Configuration
 
-### How to change providers
+### How to use Mayar provider
 
-Open `site/.env.local` and change the value of `COMMERCE_PROVIDER` to the provider you would like to use, then set the environment variables for that provider (use `site/.env.template` as the base).
+Open `site/.env.local` & `packages/mayar/.env.local` and change the value of `COMMERCE_PROVIDER` to the provider you would like to use, then set the environment variables for that provider (use `site/.env.template` & `packages/mayar/.env.template` as the base).
 
-The setup for Shopify would look like this for example:
-
-```
-COMMERCE_PROVIDER=@vercel/commerce-shopify
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=xxxxxxx.myshopify.com
+```env
+COMMERCE_PROVIDER=@vercel/commerce-mayar
+MAYAR_API_DOMAIN=https://api.mayar.id
+MAYAR_API_KEY=******************
 ```
 
 ### Features
