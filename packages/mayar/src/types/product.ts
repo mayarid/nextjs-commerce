@@ -30,7 +30,7 @@ export interface IProduct {
   coverImageId: string
   multipleImageId: any
   multipleImage: null | IMultipleImage[]
-  coverImage: null | ICover
+  coverImage: ICover
 }
 
 export interface IProductAPI {

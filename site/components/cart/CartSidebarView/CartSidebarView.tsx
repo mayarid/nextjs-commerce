@@ -109,13 +109,13 @@ const CartSidebarView: FC = () => {
               <span>{total}</span>
             </div>
             <div>
-              {process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED ? (
+              {process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED && data ? (
                 <Button Component="a" width="100%" onClick={goToCheckout}>
                   Proceed to Checkout ({total})
                 </Button>
               ) : (
                 <Button
-                  href={`https://www.mayar.shop/checkout/cart/97bf1190-a6bc-45de-a954-1fc78a3e1628`}
+                  href={`https://www.mayar.link/checkout/cart/${data.id}`}
                   Component="a"
                   width="100%"
                 >

@@ -16,7 +16,7 @@ export default function getProductOperation(_p: OperationContext<any>) {
     preview?: boolean
   } = {}): Promise<Product | {} | any> {
     const res = await fetch(
-      `${process.env.MAYAR_API_DOMAIN}/product/${variables!.slug}`,
+      `https://api.mayar.id/hl/v1/product/${variables!.slug}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
@@ -24,8 +24,21 @@ export default function getProductOperation(_p: OperationContext<any>) {
       }
     )
 
+    console.log(res.status)
+    if (!res.ok) {
+      return {
+        data: null,
+      }
+    }
+
     const result: IGetProduct = await res.json()
+    console.log(result.data.coverImage)
     const getItem: IProduct = result.data
+    if (!getItem) {
+      return {
+        data: null,
+      }
+    }
 
     const product: Product = {
       id: getItem.id,
@@ -38,11 +51,7 @@ export default function getProductOperation(_p: OperationContext<any>) {
       type: getItem.type,
       images: [
         {
-          url:
-            !getItem.coverImage && getItem.multipleImage
-              ? getItem.multipleImage[0].url
-              : getItem.coverImage!.url,
-          alt: getItem.name,
+          url: getItem.coverImage.url,
           width: 1000,
           height: 1000,
         },

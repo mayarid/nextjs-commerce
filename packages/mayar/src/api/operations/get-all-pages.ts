@@ -12,7 +12,7 @@ export default function getAllPagesOperation() {
     config?: Partial<MayarConfig>
     preview?: boolean
   }): Promise<GetAllPagesResult> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/product`, {
+    const res = await fetch(`https://api.mayar.id/hl/v1/product`, {
       headers: {
         Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
       },

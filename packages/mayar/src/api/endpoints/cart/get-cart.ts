@@ -10,12 +10,15 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
   config,
 }) => {
   const sessionId = cartId ? cartId : getCartCookie(config.cartCookie)
-  const res = await fetch(`${config.commerceUrl}/cart?sessionId=${sessionId}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${config.apiToken}`,
-    },
-  })
+  const res = await fetch(
+    `https://api.mayar.id/hl/v1/cart?sessionId=${sessionId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+      },
+    }
+  )
 
   console.log(`[get-cart]: CartID ${cartId}`)
   if (!res.ok) {
@@ -42,20 +45,12 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
         name: item.product.name,
         price: item.product.amount ? item.product.amount : 0,
         listPrice: item.product.amount ? item.product.amount : 0,
-        image:
-          item.product.multipleImage && item.product.multipleImage.length > 0
-            ? {
-                url: item.product.multipleImage[0].url,
-                alt: item.product.name,
-                width: 1000,
-                height: 1000,
-              }
-            : {
-                url: item.product.coverImage!.url,
-                alt: item.product.name,
-                width: 1000,
-                height: 1000,
-              },
+        image: {
+          url: item.product.coverImage.url,
+          alt: item.product.name,
+          width: 1000,
+          height: 1000,
+        },
       },
     })
   })

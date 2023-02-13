@@ -9,10 +9,10 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
   config,
 }) => {
   console.log({ cartId, itemId })
-  const res = await fetch(`${config.commerceUrl}/cart/remove`, {
+  const res = await fetch(`https://api.mayar.id/hl/v1/cart/remove`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${config.apiToken}`,
+      Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({

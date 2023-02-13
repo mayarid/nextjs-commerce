@@ -17,12 +17,13 @@ export default function getAllProductsOperation({
     config?: Partial<MayarConfig>
     preview?: boolean
   } = {}): Promise<{ products: Product[] }> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/product`, {
+    const res = await fetch(`https://api.mayar.id/hl/v1/product`, {
       headers: {
         Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
       },
     })
 
+    console.log(res.status)
     if (!res.ok) {
       return {
         products: [],
@@ -44,10 +45,7 @@ export default function getAllProductsOperation({
         type: item.type,
         images: [
           {
-            url:
-              !item.coverImage && item.multipleImage
-                ? item.multipleImage[0].url
-                : item.coverImage!.url,
+            url: item.coverImage.url,
             alt: item.name,
             width: 1000,
             height: 1000,

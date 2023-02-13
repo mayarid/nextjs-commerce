@@ -7,14 +7,14 @@
       "outputs": ["dist/**"]
     },
     "next-commerce#build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "env": [
         "COMMERCE_PROVIDER",
         "BIGCOMMERCE_STOREFRONT_API_URL",
         "NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN",
-        "NEXT_PUBLIC_SWELL_STORE_ID"
+        "NEXT_PUBLIC_SWELL_STORE_ID",
+        "MAYAR_API_KEY",
+        "MAYAR_API_DOMAIN"
       ],
       "outputs": [".next/**"]
     },

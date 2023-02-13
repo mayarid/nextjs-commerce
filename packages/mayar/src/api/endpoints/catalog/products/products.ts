@@ -7,7 +7,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
   config,
   commerce,
 }) => {
-  let url = `${config.commerceUrl}/product`
+  let url = `https://api.mayar.id/hl/v1/product`
   if (categoryId) {
     url += `?type=${categoryId}`
   }
@@ -46,10 +46,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
       type: item.type,
       images: [
         {
-          url:
-            !item.coverImage && item.multipleImage
-              ? item.multipleImage[0].url
-              : item.coverImage!.url,
+          url: item.coverImage.url,
           alt: item.name,
           width: 1000,
           height: 1000,

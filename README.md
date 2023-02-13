@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fcommerce&project-name=commerce&repo-name=commerce&demo-title=Next.js%20Commerce&demo-description=An%20all-in-one%20starter%20kit%20for%20high-performance%20e-commerce%20sites.&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&integration-ids=oac_MuWZiE4jtmQ2ejZQaQ7ncuDT,oac_9HSKtXld74NG0srzdxSiBGty&skippable-integrations=1&root-directory=site&build-command=cd%20..%20%26%26%20yarn%20build)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmayarid%2Fnextjs-commerce&project-name=mayar-commerce&repo-name=mayar-commerce&demo-title=Next.js%20Commerce&demo-description=An%20all-in-one%20starter%20kit%20for%20high-performance%20e-commerce%20sites.&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&integration-ids=oac_MuWZiE4jtmQ2ejZQaQ7ncuDT,oac_9HSKtXld74NG0srzdxSiBGty&skippable-integrations=1&root-directory=site&build-command=cd%20..%20%26%26%20yarn%20build)
 
 # Next.js Commerce
 
@@ -7,16 +7,16 @@ Start right now at [nextjs.org/commerce](https://nextjs.org/commerce)
 
 Demo live at: [demo.vercel.store](https://demo.vercel.store/)
 
-- Shopify Demo: https://shopify.vercel.store/
-- Swell Demo: https://swell.vercel.store/
-- BigCommerce Demo: https://bigcommerce.vercel.store/
-- Vendure Demo: https://vendure.vercel.store
-- Saleor Demo: https://saleor.vercel.store/
-- Ordercloud Demo: https://ordercloud.vercel.store/
-- Spree Demo: https://spree.vercel.store/
-- Kibo Commerce Demo: https://kibocommerce.vercel.store/
-- Commerce.js Demo: https://commercejs.vercel.store/
-- SalesForce Cloud Commerce Demo: https://salesforce-cloud-commerce.vercel.store/
+- Shopify Demo: <https://shopify.vercel.store/>
+- Swell Demo: <https://swell.vercel.store/>
+- BigCommerce Demo: <https://bigcommerce.vercel.store/>
+- Vendure Demo: <https://vendure.vercel.store>
+- Saleor Demo: <https://saleor.vercel.store/>
+- Ordercloud Demo: <https://ordercloud.vercel.store/>
+- Spree Demo: <https://spree.vercel.store/>
+- Kibo Commerce Demo: <https://kibocommerce.vercel.store/>
+- Commerce.js Demo: <https://commercejs.vercel.store/>
+- SalesForce Cloud Commerce Demo: <https://salesforce-cloud-commerce.vercel.store/>
 
 ## Run minimal version locally
 
@@ -87,6 +87,7 @@ For example: turning `cart` off will disable Cart capabilities.
 
 - Open `site/commerce.config.json`
 - You'll see a config file like this:
+
   ```json
   {
     "features": {
@@ -95,6 +96,7 @@ For example: turning `cart` off will disable Cart capabilities.
     }
   }
   ```
+
 - Turn `wishlist` on by setting `wishlist` to `true`.
 - Run the app and the wishlist functionality should be back on.
 
