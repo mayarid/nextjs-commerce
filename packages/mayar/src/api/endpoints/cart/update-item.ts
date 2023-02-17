@@ -1,14 +1,14 @@
 import type { Cart, MayarCartAPI } from '../../../types/cart'
 import type { CartEndpoint } from '.'
-import { LineItem } from '@vercel/commerce/types/cart'
 import getCartCookie from '../../utils/get-cart-cookie'
+import { LineItem } from '@vercel/commerce/types/cart'
 
 const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   body: { cartId, itemId, item },
   config,
 }) => {
   const res = await fetch(
-    `${process.env.MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${
+    `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${
       cartId ? cartId : getCartCookie(config.cartCookie)
     }`,
     {
@@ -48,6 +48,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
         id: item.product.id,
         name: item.product.name,
         price: item.product.amount ? item.product.amount : 0,
+        type: item.product.type,
         listPrice: item.product.amount ? item.product.amount : 0,
       },
     })

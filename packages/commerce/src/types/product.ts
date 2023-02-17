@@ -135,6 +135,7 @@ export interface Product {
   vendor?: string
   category?: string
   type?: string
+  createdAt: number
 }
 
 export interface SearchProductsBody {

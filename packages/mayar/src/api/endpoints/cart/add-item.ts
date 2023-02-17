@@ -22,7 +22,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     }),
   }
 
-  const url = `${process.env.MAYAR_API_DOMAIN}/hl/v1/cart/add`
+  const url = `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart/add`
   const res = await fetch(url, options)
 
   console.log(`[cart/add-item]Status: ${res.statusText}`)
@@ -51,6 +51,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
           name: item.product.name,
           price: item.product.amount ? item.product.amount : 0,
           listPrice: item.product.amount ? item.product.amount : 0,
+          type: item.product.type,
           image: {
             url: item.product.coverImage.url,
             alt: item.product.name,
@@ -75,6 +76,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
           name: item.product.name,
           price: item.product.amount ? item.product.amount : 0,
           listPrice: item.product.amount ? item.product.amount : 0,
+          type: item.product.type,
           image: {
             url: item.product.multipleImage[0].url,
             alt: item.product.name,
@@ -98,6 +100,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
         name: item.product.name,
         price: item.product.amount ? item.product.amount : 0,
         listPrice: item.product.amount ? item.product.amount : 0,
+        type: item.product.type,
         image: {
           url: '',
           alt: item.product.name,

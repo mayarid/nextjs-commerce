@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import type {
   MutationHookContext,
   HookFetcherContext,
+  MutationHook,
 } from '@vercel/commerce/utils/types'
 import { ValidationError } from '@vercel/commerce/utils/errors'
 import useRemoveItem, {

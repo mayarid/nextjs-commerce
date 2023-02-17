@@ -14,32 +14,33 @@ export default function getProductOperation(_p: OperationContext<any>) {
     variables?: T['variables']
     config?: Partial<MayarConfig>
     preview?: boolean
-  } = {}): Promise<Product | {} | any> {
-    const res = await fetch(
-      `${process.env.MAYAR_API_DOMAIN}/hl/v1/product/${variables!.slug}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-        },
-      }
-    )
+  } = {}): Promise<Product | {}> {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product/${
+          variables!.slug
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+          },
+        }
+      )
 
-    console.log(`[operations/get-product]Status: ${res.statusText}`)
-    if (!res.ok) {
-      return {
-        data: null,
+      console.log(`[operations/get-product]Status: ${res.statusText}`)
+      if (!res.ok) {
+        return {
+          data: {},
+        }
       }
-    }
 
-    const result: IGetProduct = await res.json()
-    const getItem: IProduct = result.data
-    if (!getItem) {
-      return {
-        data: null,
+      const result: IGetProduct = await res.json()
+      const getItem: IProduct = result.data
+      if (!getItem) {
+        return {
+          data: {},
+        }
       }
-    }
-
-    if (getItem.coverImage) {
       const product: Product = {
         id: getItem.id,
         name: getItem.name,
@@ -49,76 +50,42 @@ export default function getProductOperation(_p: OperationContext<any>) {
         slug: getItem.link,
         category: getItem.category,
         type: getItem.type,
-        images: [
-          {
-            url: getItem.coverImage.url,
-            width: 1000,
-            height: 1000,
-          },
-        ],
+        images: getItem.coverImage
+          ? [
+              {
+                url: getItem.coverImage.url,
+                alt: getItem.name,
+                width: 1000,
+                height: 1000,
+              },
+            ]
+          : getItem.multipleImage && getItem.multipleImage.length > 0
+          ? [
+              {
+                url: getItem.multipleImage[0].url,
+                alt: getItem.name,
+                width: 1000,
+                height: 1000,
+              },
+            ]
+          : [],
         variants: [],
         price: {
           value: getItem.amount ? getItem.amount : 0,
           currencyCode: 'IDR',
         },
         options: [],
+        createdAt: getItem.createdAt ? getItem.createdAt : 0,
       }
 
       return {
         product: product,
       }
-    }
-
-    if (getItem.multipleImage && getItem.multipleImage.length > 0) {
-      const product: Product = {
-        id: getItem.id,
-        name: getItem.name,
-        description: '',
-        descriptionHtml: getItem.description,
-        path: `/${getItem.id}`,
-        slug: getItem.link,
-        category: getItem.category,
-        type: getItem.type,
-        images: [
-          {
-            url: getItem.multipleImage[0].url,
-            width: 1000,
-            height: 1000,
-          },
-        ],
-        variants: [],
-        price: {
-          value: getItem.amount ? getItem.amount : 0,
-          currencyCode: 'IDR',
-        },
-        options: [],
-      }
-
+    } catch (err) {
+      console.error(err)
       return {
-        product: product,
+        data: {},
       }
-    }
-
-    const product: Product = {
-      id: getItem.id,
-      name: getItem.name,
-      description: '',
-      descriptionHtml: getItem.description,
-      path: `/${getItem.id}`,
-      slug: getItem.link,
-      category: getItem.category,
-      type: getItem.type,
-      images: [],
-      variants: [],
-      price: {
-        value: getItem.amount ? getItem.amount : 0,
-        currencyCode: 'IDR',
-      },
-      options: [],
-    }
-
-    return {
-      product: product,
     }
   }
 

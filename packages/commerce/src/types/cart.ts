@@ -23,6 +23,10 @@ export interface ProductVariant {
    */
   listPrice: number
   /**
+   * Type of product
+   */
+  type?: string
+  /**
    * Indicates if the variant is available for sale.
    */
   availableForSale?: boolean

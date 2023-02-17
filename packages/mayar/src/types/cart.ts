@@ -1,4 +1,9 @@
-import { LineItem, Cart as CartOriginal } from '@vercel/commerce/types/cart'
+import {
+  Cart as CartOriginal,
+  LineItem,
+  RemoveItemHook,
+  UpdateItemHook,
+} from '@vercel/commerce/types/cart'
 import type { IProduct } from './product'
 
 export type MayarProduct = {

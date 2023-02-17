@@ -21,42 +21,61 @@ export default function getSiteInfoOperation({}: OperationContext<any>) {
     config?: Partial<MayarConfig>
     preview?: boolean
   } = {}): Promise<GetSiteInfoResult> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/product`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-      },
-    })
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+          },
+        }
+      )
 
-    console.log(`[operations/get-site-info]Status: ${res.statusText}`)
-    if (!res.ok) {
+      console.log(`[operations/get-site-info]Status: ${res.statusText}`)
+      if (!res.ok) {
+        return {
+          categories: [],
+          brands: [],
+        }
+      }
+
+      let categories: Category[] = []
+      let prevType: string = ''
+      const result: IProductAPI = await res.json()
+
+      result.data.map((product, _) => {
+        if (prevType !== product.type) {
+          let name = product.type
+            .split('_')
+            .map((word) => word[0].toUpperCase() + word.slice(1))
+            .join(' ')
+
+          categories.push({
+            id: product.type,
+            name,
+            slug: product.type,
+            path: `/${product.type}`,
+          })
+
+          prevType = product.type
+          return
+        }
+
+        return
+      })
+
+      return Promise.resolve({
+        categories,
+        brands: [],
+      })
+    } catch (err) {
+      console.error(err)
       return {
         categories: [],
         brands: [],
       }
     }
-
-    let categories: Category[] = []
-    const result: IProductAPI = await res.json()
-
-    result.data.map((product, _) => {
-      let name = product.type
-        .split('_')
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(' ')
-
-      return categories.push({
-        id: product.type,
-        name,
-        slug: product.type,
-        path: `/${product.type}`,
-      })
-    })
-
-    return Promise.resolve({
-      categories,
-      brands: [],
-    })
   }
 
   return getSiteInfo

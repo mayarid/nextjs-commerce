@@ -1,25 +1,28 @@
 import type { Cart, MayarCartAPI } from '../../../types/cart'
 import type { CartEndpoint } from '.'
-import { LineItem } from '@vercel/commerce/types/cart'
 
 import getCartCookie from '../../utils/get-cart-cookie'
+import { LineItem } from '@vercel/commerce/types/cart'
 
 const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
   body: { cartId, itemId },
   config,
 }) => {
   console.log({ cartId, itemId })
-  const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/cart/remove`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      id: itemId,
-      sessionId: cartId,
-    }),
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart/remove`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: itemId,
+        sessionId: cartId,
+      }),
+    }
+  )
 
   console.log(`[cart/remote-item]Status: ${res.statusText}`)
   if (!res.ok) {
@@ -43,6 +46,7 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
       variant: {
         id: item.product.id,
         name: item.product.name,
+        type: item.product.type,
         price: item.product.amount ? item.product.amount : 0,
         listPrice: item.product.amount ? item.product.amount : 0,
       },

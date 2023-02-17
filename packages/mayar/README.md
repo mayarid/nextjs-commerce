@@ -8,6 +8,6 @@ The setup for Shopify would look like this for example:
 
 ```env
 COMMERCE_PROVIDER=@vercel/commerce-mayar
-MAYAR_API_DOMAIN=xxxxxxx.mayar.xxxxxxx
+NEXT_PUBLIC_MAYAR_API_DOMAIN=xxxxxxx.mayar.xxxxxxx
 MAYAR_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```

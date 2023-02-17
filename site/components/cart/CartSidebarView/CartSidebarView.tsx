@@ -113,7 +113,8 @@ const CartSidebarView: FC = () => {
                 <Button Component="a" width="100%" onClick={goToCheckout}>
                   Proceed to Checkout ({total})
                 </Button>
-              ) : process.env.MAYAR_API_DOMAIN === 'https://api.mayar.id' ? (
+              ) : process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN ===
+                'https://api.mayar.id' ? (
                 <Button
                   href={`https://www.mayar.link/checkout/cart/${data.id}`}
                   Component="a"

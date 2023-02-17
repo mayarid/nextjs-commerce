@@ -12,33 +12,44 @@ export default function getAllPagesOperation() {
     config?: Partial<MayarConfig>
     preview?: boolean
   }): Promise<GetAllPagesResult> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/product`, {
-      headers: {
-        Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-      },
-    })
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+          },
+        }
+      )
 
-    console.log(`[operations/get-all-pages]Status: ${res.statusText}`)
-    if (!res.ok) {
+      console.log(`[operations/get-all-pages]Status: ${res.statusText}`)
+      if (!res.ok) {
+        return {
+          pages: [],
+        }
+      }
+
+      let pages: Page[] = []
+      const result: IProductAPI = await res.json()
+
+      result.data.map((product, _) => {
+        pages.push({
+          id: product.id,
+          name: product.name,
+          body: product.description,
+        })
+      })
+
+      return Promise.resolve({
+        pages,
+      })
+    } catch (err) {
+      console.error(err)
       return {
         pages: [],
       }
     }
-
-    let pages: Page[] = []
-    const result: IProductAPI = await res.json()
-
-    result.data.map((product, _) => {
-      pages.push({
-        id: product.id,
-        name: product.name,
-        body: product.description,
-      })
-    })
-
-    return Promise.resolve({
-      pages,
-    })
   }
   return getAllPages
 }

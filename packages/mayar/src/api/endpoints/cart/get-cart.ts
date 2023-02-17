@@ -11,7 +11,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
 }) => {
   const sessionId = cartId ? cartId : getCartCookie(config.cartCookie)
   const res = await fetch(
-    `${process.env.MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${sessionId}`,
+    `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${sessionId}`,
     {
       method: 'GET',
       headers: {
@@ -45,6 +45,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
           name: item.product.name,
           price: item.product.amount ? item.product.amount : 0,
           listPrice: item.product.amount ? item.product.amount : 0,
+          type: item.product.type,
           image: {
             url: item.product.coverImage.url,
             alt: item.product.name,
@@ -69,6 +70,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
           name: item.product.name,
           price: item.product.amount ? item.product.amount : 0,
           listPrice: item.product.amount ? item.product.amount : 0,
+          type: item.product.type,
           image: {
             url: item.product.multipleImage[0].url,
             alt: item.product.name,
@@ -92,6 +94,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
         name: item.product.name,
         price: item.product.amount ? item.product.amount : 0,
         listPrice: item.product.amount ? item.product.amount : 0,
+        type: item.product.type,
         image: {
           url: '',
           alt: item.product.name,

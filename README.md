@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmayarid%2Fnextjs-commerce&project-name=mayar-commerce&repo-name=mayar-commerce&demo-title=Next.js%20Commerce&demo-description=An%20all-in-one%20starter%20kit%20for%20high-performance%20e-commerce%20sites.&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&integration-ids=oac_MuWZiE4jtmQ2ejZQaQ7ncuDT,oac_9HSKtXld74NG0srzdxSiBGty&skippable-integrations=1&root-directory=site&build-command=cd%20..%20%26%26%20yarn%20build)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmayarid%2Fnextjs-commerce&env=COMMERCE_PROVIDER,NEXT_PUBLIC_MAYAR_API_DOMAIN,MAYAR_API_KEY&project-name=mayar-commerce&repository-name=mayar-commerce)
 
 # Next.js Commerce
 
@@ -18,23 +18,24 @@ Demo live at: [demo.vercel.store](https://demo.vercel.store/)
 - Commerce.js Demo: <https://commercejs.vercel.store/>
 - SalesForce Cloud Commerce Demo: <https://salesforce-cloud-commerce.vercel.store/>
 
+## Configuration
+
+### How to use Mayar provider
+
+Open `site/.env.local` and change the value of `COMMERCE_PROVIDER` to @vercel/commerce-mayar, then set the environment variables for that provider (use `site/.env.template` as the base).
+
+```env
+COMMERCE_PROVIDER=@vercel/commerce-mayar
+NEXT_PUBLIC_MAYAR_API_DOMAIN=https://api.mayar.id
+MAYAR_API_KEY=******************
+```
+
 ## Run with mayar commerce
 
 ```bash
-pnpm install & pnpm build # run these commands in the root folder of the mono repo
+pnpm install && pnpm build # run these commands in the root folder of the mono repo
 pnpm dev # run this command in the root folder
 ```
-
-## Run minimal version locally
-
-> To run a minimal version of Next.js Commerce you can start with the default local provider `@vercel/commerce-local` that has all features disabled (cart, auth) and uses static files for the backend
-
-```bash
-pnpm install & pnpm build # run these commands in the root folder of the mono repo
-pnpm dev # run this command in the site folder
-```
-
-> If you encounter any problems while installing and running for the first time, please see the Troubleshoot section
 
 ## Features
 
@@ -58,18 +59,6 @@ Next.js Commerce integrates out-of-the-box with BigCommerce, Shopify, Swell, Sal
 - **Providers** live under `packages`'s root folder and they will extend Next.js Commerce types and functionality (`packages/commerce`).
 - We have a **Features API** to ensure feature parity between the UI and the Provider. The UI should update accordingly and no extra code should be bundled. All extra configuration for features will live under `features` in `commerce.config.json` and if needed it can also be accessed programmatically.
 - Each **provider** should add its corresponding `next.config.js` and `commerce.config.json` adding specific data related to the provider. For example in the case of BigCommerce, the images CDN and additional API routes.
-
-## Configuration
-
-### How to use Mayar provider
-
-Open `site/.env.local` & `packages/mayar/.env.local` and change the value of `COMMERCE_PROVIDER` to the provider you would like to use, then set the environment variables for that provider (use `site/.env.template` & `packages/mayar/.env.template` as the base).
-
-```env
-COMMERCE_PROVIDER=@vercel/commerce-mayar
-MAYAR_API_DOMAIN=https://api.mayar.id
-MAYAR_API_KEY=******************
-```
 
 ### Features
 

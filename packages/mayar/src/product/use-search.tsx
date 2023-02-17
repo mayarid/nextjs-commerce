@@ -28,6 +28,10 @@ export const handler: SWRHook<any> = {
       url += `?categoryId=${categoryId}`
     }
 
+    if (sort) {
+      url += `?sort=${sort}`
+    }
+
     return fetch({
       ...options,
       url,

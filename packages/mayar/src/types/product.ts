@@ -1,3 +1,5 @@
+import { ProductVariant } from '@vercel/commerce/types/cart'
+
 export interface ICover {
   id: string
   fileType: string
@@ -16,7 +18,7 @@ export interface IProduct {
   id: string
   amount: null | number
   category: string
-  createdAt: Date
+  createdAt: number
   description: string
   link: string
   type: string

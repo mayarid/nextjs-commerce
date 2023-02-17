@@ -17,98 +17,73 @@ export default function getAllProductsOperation({
     config?: Partial<MayarConfig>
     preview?: boolean
   } = {}): Promise<{ products: Product[] }> {
-    const res = await fetch(`${process.env.MAYAR_API_DOMAIN}/hl/v1/product`, {
-      headers: {
-        Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-      },
-    })
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+          },
+        }
+      )
 
-    console.log(`[operations/get-all-products]Status: ${res.statusText}`)
-    if (!res.ok) {
+      console.log(`[operations/get-all-products]Status: ${res.statusText}`)
+      if (!res.ok) {
+        return {
+          products: [],
+        }
+      }
+
+      const result: IProductAPI = await res.json()
+
+      let products: Product[] = result.data.map((item, _) => {
+        const product: Product = {
+          id: item.id,
+          name: item.name,
+          description: '',
+          descriptionHtml: item.description,
+          path: `/${item.id}`,
+          slug: item.link,
+          category: item.category,
+          type: item.type,
+          images: item.coverImage
+            ? [
+                {
+                  url: item.coverImage.url,
+                  alt: item.name,
+                  width: 1000,
+                  height: 1000,
+                },
+              ]
+            : item.multipleImage && item.multipleImage.length > 0
+            ? [
+                {
+                  url: item.multipleImage[0].url,
+                  alt: item.name,
+                  width: 1000,
+                  height: 1000,
+                },
+              ]
+            : [],
+          variants: [],
+          price: {
+            value: item.amount ? item.amount : 0,
+            currencyCode: 'IDR',
+          },
+          options: [],
+          createdAt: item.createdAt, // Add the createdAt property to the product
+        }
+        return product
+      })
+
+      return {
+        products,
+      }
+    } catch (err) {
+      console.error(err)
       return {
         products: [],
       }
-    }
-
-    let products: Product[] = []
-    const result: IProductAPI = await res.json()
-
-    result.data.map((item, _) => {
-      if (item.multipleImage && item.multipleImage.length > 0) {
-        return products.push({
-          id: item.id,
-          name: item.name,
-          description: '',
-          descriptionHtml: item.description,
-          path: `/${item.id}`,
-          slug: item.link,
-          category: item.category,
-          type: item.type,
-          images: [
-            {
-              url: item.multipleImage[0].url,
-              alt: item.name,
-              width: 1000,
-              height: 1000,
-            },
-          ],
-          variants: [],
-          price: {
-            value: item.amount ? item.amount : 0,
-            currencyCode: 'IDR',
-          },
-          options: [],
-        })
-      }
-
-      if (item.coverImage) {
-        return products.push({
-          id: item.id,
-          name: item.name,
-          description: '',
-          descriptionHtml: item.description,
-          path: `/${item.id}`,
-          slug: item.link,
-          category: item.category,
-          type: item.type,
-          images: [
-            {
-              url: item.coverImage.url,
-              alt: item.name,
-              width: 1000,
-              height: 1000,
-            },
-          ],
-          variants: [],
-          price: {
-            value: item.amount ? item.amount : 0,
-            currencyCode: 'IDR',
-          },
-          options: [],
-        })
-      }
-
-      return products.push({
-        id: item.id,
-        name: item.name,
-        description: '',
-        descriptionHtml: item.description,
-        path: `/${item.id}`,
-        slug: item.link,
-        category: item.category,
-        type: item.type,
-        images: [],
-        variants: [],
-        price: {
-          value: item.amount ? item.amount : 0,
-          currencyCode: 'IDR',
-        },
-        options: [],
-      })
-    })
-
-    return {
-      products,
     }
   }
   return getAllProducts
