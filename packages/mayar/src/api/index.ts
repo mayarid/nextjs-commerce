@@ -13,7 +13,7 @@ import getProduct from './operations/get-product'
 export interface MayarConfig extends CommerceAPIConfig {}
 
 const config: MayarConfig = {
-  commerceUrl: process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN!,
+  commerceUrl: 'https://api.mayar.id',
   apiToken: process.env.MAYAR_API_KEY!,
   cartCookie: 'mayar-commerce',
   customerCookie: 'SHOP_TOKEN',

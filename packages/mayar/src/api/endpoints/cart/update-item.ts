@@ -8,7 +8,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   config,
 }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${
+    `https://api.mayar.id/hl/v1/cart?sessionId=${
       cartId ? cartId : getCartCookie(config.cartCookie)
     }`,
     {

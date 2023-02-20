@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmayarid%2Fnextjs-commerce&env=COMMERCE_PROVIDER,NEXT_PUBLIC_MAYAR_API_DOMAIN,MAYAR_API_KEY&project-name=mayar-commerce&repository-name=mayar-commerce)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmayarid%2Fnextjs-commerce&env=COMMERCE_PROVIDER,MAYAR_API_KEY&project-name=mayar-commerce&repository-name=mayar-commerce&demo-title=Next.js%20Commerce&demo-description=An%20all-in-one%20starter%20kit%20for%20high-performance%20e-commerce%20sites.&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&root-directory=site&build-command=cd%20..%20%26%26%20yarn%20build)
 
 # Next.js Commerce
 
@@ -26,7 +26,6 @@ Open `site/.env.local` and change the value of `COMMERCE_PROVIDER` to @vercel/co
 
 ```env
 COMMERCE_PROVIDER=@vercel/commerce-mayar
-NEXT_PUBLIC_MAYAR_API_DOMAIN=https://api.mayar.id
 MAYAR_API_KEY=******************
 ```
 

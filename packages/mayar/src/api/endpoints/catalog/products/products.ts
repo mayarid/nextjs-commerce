@@ -7,7 +7,7 @@ const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
   config,
   commerce,
 }) => {
-  let url = `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`
+  let url = `https://api.mayar.id/hl/v1/product`
   if (categoryId) {
     url += `?type=${categoryId}`
   }

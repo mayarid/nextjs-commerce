@@ -18,14 +18,11 @@ export default function getAllProductsOperation({
     preview?: boolean
   } = {}): Promise<{ products: Product[] }> {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-          },
-        }
-      )
+      const res = await fetch(`https://api.mayar.id/hl/v1/product`, {
+        headers: {
+          Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+        },
+      })
 
       console.log(`[operations/get-all-products]Status: ${res.statusText}`)
       if (!res.ok) {

@@ -17,9 +17,7 @@ export default function getProductOperation(_p: OperationContext<any>) {
   } = {}): Promise<Product | {}> {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product/${
-          variables!.slug
-        }`,
+        `https://api.mayar.id/hl/v1/product/${variables!.slug}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,

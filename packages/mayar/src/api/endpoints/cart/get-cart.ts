@@ -11,7 +11,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
 }) => {
   const sessionId = cartId ? cartId : getCartCookie(config.cartCookie)
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart?sessionId=${sessionId}`,
+    `https://api.mayar.id/hl/v1/cart?sessionId=${sessionId}`,
     {
       method: 'GET',
       headers: {

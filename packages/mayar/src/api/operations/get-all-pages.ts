@@ -13,15 +13,12 @@ export default function getAllPagesOperation() {
     preview?: boolean
   }): Promise<GetAllPagesResult> {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/product`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
-          },
-        }
-      )
+      const res = await fetch(`https://api.mayar.id/hl/v1/product`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.MAYAR_API_KEY}`,
+        },
+      })
 
       console.log(`[operations/get-all-pages]Status: ${res.statusText}`)
       if (!res.ok) {

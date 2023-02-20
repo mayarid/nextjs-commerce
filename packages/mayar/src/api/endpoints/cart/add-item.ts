@@ -22,7 +22,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     }),
   }
 
-  const url = `${process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN}/hl/v1/cart/add`
+  const url = `https://api.mayar.id/hl/v1/cart/add`
   const res = await fetch(url, options)
 
   console.log(`[cart/add-item]Status: ${res.statusText}`)

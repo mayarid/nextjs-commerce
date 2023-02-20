@@ -110,27 +110,19 @@ const CartSidebarView: FC = () => {
             </div>
             <div>
               {process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED && data ? (
-                <Button Component="a" width="100%" onClick={goToCheckout}>
-                  Proceed to Checkout ({total})
-                </Button>
-              ) : process.env.NEXT_PUBLIC_MAYAR_API_DOMAIN ===
-                'https://api.mayar.id' ? (
-                <Button
-                  href={`https://www.mayar.link/checkout/cart/${data.id}`}
-                  Component="a"
-                  width="100%"
-                >
-                  Proceed to Checkout
-                </Button>
-              ) : (
-                <Button
-                  href={`https://www.mayar.shop/checkout/cart/${data.id}`}
-                  Component="a"
-                  width="100%"
-                >
-                  Proceed to Checkout
-                </Button>
-              )}
+                <>
+                  <Button Component="a" width="100%" onClick={goToCheckout}>
+                    Proceed to Checkout ({total})
+                  </Button>
+                  <Button
+                    href={`https://www.mayar.link/checkout/cart/${data.id}`}
+                    Component="a"
+                    width="100%"
+                  >
+                    Proceed to Checkout
+                  </Button>
+                </>
+              ) : null}
             </div>
           </div>
         </>
