@@ -50,17 +50,20 @@ export const handler: SWRHook<any> = {
         swrOptions: { revalidateOnFocus: false, ...input?.swrOptions },
       })
 
-      return useMemo(
-        () =>
-          Object.create(response, {
-            isEmpty: {
-              get() {
-                return (response.data?.lineItems.length ?? 0) <= 0
-              },
-              enumerable: true,
-            },
-          }),
-        [response]
-      )
+      console.log(response.data)
+      return response
+
+      // return useMemo(
+      //   () =>
+      //     Object.create(response, {
+      //       isEmpty: {
+      //         get() {
+      //           return (response.data?.lineItems.length ?? 0) <= 0
+      //         },
+      //         enumerable: true,
+      //       },
+      //     }),
+      //   [response]
+      // )
     },
 }

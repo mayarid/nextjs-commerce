@@ -1,5 +1,6 @@
 import type { MayarConfig } from '../index'
 import { Product } from '@vercel/commerce/types/product'
+import { Image } from '@vercel/commerce/types/common'
 import { GetProductOperation } from '@vercel/commerce/types/product'
 import type { OperationContext } from '@vercel/commerce/api/operations'
 import { IProductAPI, IProduct, IGetProduct } from '../../types/product'
@@ -39,6 +40,19 @@ export default function getProductOperation(_p: OperationContext<any>) {
           data: {},
         }
       }
+
+      let images: Image[] = []
+      if (getItem.multipleImage && getItem.multipleImage.length > 0) {
+        getItem.multipleImage.map((img, index) => {
+          images.push({
+            url: img.url,
+            alt: `${getItem.link}-image-${index}`,
+            width: 1000,
+            height: 1000,
+          })
+        })
+      }
+
       const product: Product = {
         id: getItem.id,
         name: getItem.name,
@@ -58,14 +72,7 @@ export default function getProductOperation(_p: OperationContext<any>) {
               },
             ]
           : getItem.multipleImage && getItem.multipleImage.length > 0
-          ? [
-              {
-                url: getItem.multipleImage[0].url,
-                alt: getItem.name,
-                width: 1000,
-                height: 1000,
-              },
-            ]
+          ? images
           : [],
         variants: [],
         price: {
@@ -73,6 +80,7 @@ export default function getProductOperation(_p: OperationContext<any>) {
           currencyCode: 'IDR',
         },
         options: [],
+        order: getItem.order,
         createdAt: getItem.createdAt ? getItem.createdAt : 0,
       }
 

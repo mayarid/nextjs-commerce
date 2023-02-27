@@ -135,7 +135,16 @@ export interface Product {
   vendor?: string
   category?: string
   type?: string
+  order?: ProductOrder
   createdAt: number
+}
+
+export interface ProductOrder {
+  id: string
+  variant: any
+  length: number
+  width: number
+  weight: number
 }
 
 export interface SearchProductsBody {
@@ -167,6 +176,10 @@ export interface SearchProductsBody {
  */
 export type SearchProductsHook = {
   data: {
+    total: number
+    page: number
+    pageSize: number
+    pageCount: number
     /**
      * List of products matching the query.
      */

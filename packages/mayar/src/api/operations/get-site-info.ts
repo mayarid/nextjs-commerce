@@ -38,11 +38,27 @@ export default function getSiteInfoOperation({}: OperationContext<any>) {
       }
 
       let categories: Category[] = []
-      let prevType: string = ''
+      let prevType: string[] = []
       const result: IProductAPI = await res.json()
 
       result.data.map((product, _) => {
-        if (prevType !== product.type) {
+        let slug = product.category.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+        if (!prevType.includes(slug) && product.type === 'physical_product') {
+          categories.push({
+            id: `${product.type}_${slug}`,
+            name: product.category,
+            slug: slug,
+            path: `/${slug}`,
+          })
+
+          prevType.push(slug)
+          return
+        }
+
+        if (
+          !prevType.includes(product.type) &&
+          product.type !== 'physical_product'
+        ) {
           let name = product.type
             .split('_')
             .map((word) => word[0].toUpperCase() + word.slice(1))
@@ -55,7 +71,7 @@ export default function getSiteInfoOperation({}: OperationContext<any>) {
             path: `/${product.type}`,
           })
 
-          prevType = product.type
+          prevType.push(product.type)
           return
         }
 

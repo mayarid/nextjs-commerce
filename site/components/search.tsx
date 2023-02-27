@@ -28,6 +28,7 @@ import {
   useSearchMeta,
 } from '@lib/search'
 import ErrorMessage from './ui/ErrorMessage'
+import Pagination from './common/Pagination'
 
 export default function Search({ categories, brands }: SearchPropsType) {
   const [activeFilter, setActiveFilter] = useState('')
@@ -57,6 +58,8 @@ export default function Search({ categories, brands }: SearchPropsType) {
   if (error) {
     return <ErrorMessage error={error} />
   }
+
+  console.log(data)
 
   const handleClick = (event: any, filter: string) => {
     if (filter !== activeFilter) {
@@ -320,21 +323,23 @@ export default function Search({ categories, brands }: SearchPropsType) {
             </div>
           )}
           {data ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {data.products.map((product: Product) => (
-                <ProductCard
-                  variant="simple"
-                  key={product.path}
-                  className="animated fadeIn"
-                  product={product}
-                  imgProps={{
-                    width: 480,
-                    height: 480,
-                    alt: product.name,
-                  }}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {data.products.map((product: Product) => (
+                  <ProductCard
+                    variant="simple"
+                    key={product.path}
+                    className="animated fadeIn"
+                    product={product}
+                    imgProps={{
+                      width: 480,
+                      height: 480,
+                      alt: product.name,
+                    }}
+                  />
+                ))}
+              </div>
+            </>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {rangeMap(12, (i) => (
@@ -344,6 +349,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
               ))}
             </div>
           )}{' '}
+          {/* <Pagination currentPage={1} numPages={2} basePath="/" /> */}
         </div>
 
         {/* Sort */}

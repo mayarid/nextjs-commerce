@@ -64,8 +64,8 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
         html={product.descriptionHtml || product.description}
       />
       <div className="flex flex-row justify-between items-center">
-        <Rating value={4} />
-        <div className="text-accent-6 pr-1 font-medium text-sm">36 reviews</div>
+        {/* <Rating value={4} />
+        <div className="text-accent-6 pr-1 font-medium text-sm">36 reviews</div> */}
       </div>
       <div>
         {error && <ErrorMessage error={error} className="my-5" />}
@@ -85,15 +85,22 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
         )}
       </div>
       <div className="mt-6">
-        <Collapse title="Care">
+        {/* <Collapse title="Care">
           This is a limited edition production run. Printing starts when the
           drop ends.
-        </Collapse>
-        <Collapse title="Details">
-          This is a limited edition production run. Printing starts when the
-          drop ends. Reminder: Bad Boys For Life. Shipping may take 10+ days due
-          to COVID-19.
-        </Collapse>
+        </Collapse> */}
+        {product.type === 'physical_product' && product.order ? (
+          <Collapse title="Details">
+            <ul className="list-disc">
+              <li>Name: {product.name}</li>
+              <li>Category: {product.category}</li>
+              <li>
+                Size: {product.order.length}cm x {product.order.width}
+              </li>
+              <li>Weight: {product.order.weight} gram</li>
+            </ul>
+          </Collapse>
+        ) : null}
       </div>
     </div>
   )

@@ -43,6 +43,7 @@ export interface IProductAPI {
   pageSize: number
   page: number
   data: IProduct[]
+  total: number
 }
 
 export interface IGetProduct {
